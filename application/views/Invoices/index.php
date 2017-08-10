@@ -11,7 +11,8 @@
     <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="manageTbls">
         <thead>
                 <tr>    
-                        <th>Customer id</th>
+                        <th>Invoice#</th>
+						<th>Customer id</th>
                         <th>Invoice total</th>
                         <th>Invoice date</th>
                         <th>Status</th>
@@ -86,12 +87,14 @@
             "pageLength": 10,
             "ColumnDefs": [
                 {"name": "Action", "targets": 2},
+				{"width": "1%", "name": "invoice_number", "targets": 4, "orderable": false},
                 {"width": "1%", "name": "customer_id", "targets": 4, "orderable": false},
                 {"width": "1%", "name": "invoice_total", "targets": 4, "orderable": false},
                 {"width": "1%", "name": "invoice_date", "targets": 4, "orderable": false},
                 {"width": "1%", "name": "status", "targets": 4, "orderable": false}
             ],
             "aoColumns": [
+                null,
                 null,
                 null,
                 null,

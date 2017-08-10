@@ -9,12 +9,14 @@
 
     table .form-control{
         border-radius: 0;
+		text-transform: uppercase;
     }
     
     .form-inline .form-control {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
+	text-transform: uppercase;
 }
 .pricing_detail .form-inline .form-control {
     padding: 10px;
@@ -27,6 +29,13 @@
         <h1 class="headerbar-title"><?php echo $title; ?></h1>
         <div class="headerbar-item pull-right">
             <div class="btn-group btn-group-sm">
+				<?php if(isset($arrData->id))
+			{?>
+            
+                <button  class="btn btn-primary ajax-loader" type="button">
+					
+					<a href="<?php echo site_url() ."invoices/printInvoice/$arrData->id"  ?>" target="_blank" style="text-decoration: none; color: #FFF"><i class="fa fa-print"></i> Print </a></button>
+			<?php }?>
                 <button  class="btn btn-success ajax-loader" type="submit">
                     <i class="fa fa-check"></i> Save </button>
                 <a class="btn btn-danger backPage">
@@ -229,7 +238,7 @@
                                                 <?php
                                                 $tblCnt =  0;
                                                 $productTotal = 0;
-                                                $array = [];
+                                                $array = array();
                                                 if ($arrSubData) {
                                                     $array = $arrSubData;
                                                 }
@@ -271,9 +280,6 @@
                                                         <td>
                                                         <input type='text' name='CGST_amount[" . $key . "]' id='cgst_amount_" . $key . "'  class='form-control' value='" . $value->CGST_amount . "'/>
                                                         
-                                                        <input type='hidden' value='" . $value->SGST_rate . "' id='sgst_rate_" . $key . "'   name='SGST_rate[" . $key . "]' class='form-control'/>
-                                                        
-                                                        <input type='hidden' value='" . $value->SGST_amount . "' id='sgst_amount_" . $key . "'  name='SGST_amount[" . $key . "]' class='form-control'/>
                                                         </td>
                                                         <td>
                                                         <input type='text' value='" . $value->IGST_rate . "' id='igst_rate_" . $key . "' onBlur='callIGST(" . $key . ")' name='IGST_rate[" . $key . "]' class='form-control'/>
@@ -454,8 +460,7 @@
                     <td><input  name='taxable_value[" + i + "]' id='taxable_" + i + "'  onBlur='callCGST(" + i + ")' type='text' class='form-control input-md'></td>\n\
                     <td><input  name='CGST_rate[" + i + "]' id='cgst_rate_" + i + "' type='text' onBlur='callCGST(" + i + ")' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='CGST_amount[" + i + "]'id='cgst_amount_" + i + "' type='text' value='0' class='form-control input-md'>\n\
-				<input  name='SGST_rate[" + i + "]'id='sgst_rate_" + i + "' type='hidden' value='0' class='form-control input-md'><input  name='SGST_amount[" + i + "]' id='sgst_amount_" + i + "' type='hidden' value='0' class='form-control input-md'></td>\n\
-                    <td><input  name='IGST_rate[" + i + "]' id='igst_rate_" + i + "' type='text'  onBlur='callIGST(" + i + ")' value='0' class='form-control input-md'></td>\n\
+					<td><input  name='IGST_rate[" + i + "]' id='igst_rate_" + i + "' type='text'  onBlur='callIGST(" + i + ")' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='IGST_amount[" + i + "]' id='igst_amount_" + i + "' type='text' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='final_amount[" + i + "]' id='final_" + i + "' type='text'  onBlur='callTAX(" + i + ")' value='0' class='form-control input-md'></td>\n\
                     <td><button type='button' class='btn btn-danger btn-xs' data-title='Delete' onClick='deleteRow(" + i + ")' ><i class='material-icons'>delete_forever</i></button></td>\n\
@@ -508,7 +513,6 @@
         var total = parseFloat(total) - parseFloat(discount);
         $('#taxable_' + no).val(total);
         callCGST(no);
-        callSGST(no);
         callIGST(no);
 
     }
@@ -519,33 +523,16 @@
         var taxable = $('#taxable_' + no).val();
         if (cgstrate > 0)
         {
-	  var sgstrate = cgstrate/2;
-		
-		 $('#sgst_rate_' + no).val(sgstrate);
             var total = ((parseFloat(taxable) * parseFloat(cgstrate))) / 100;
 
             $('#cgst_amount_' + no).val(total);
-	    callSGST(no);
+	    
         } else
         {
             $('#cgst_amount_' + no).val(0);
         }
     }
 
-    function callSGST(no)
-    {
-        var sgstrate = $('#sgst_rate_' + no).val();
-        var taxable = $('#taxable_' + no).val();
-        if (sgstrate > 0)
-        {
-            var total = ((parseFloat(taxable) * parseFloat(sgstrate))) / 100;
-
-            $('#sgst_amount_' + no).val(total);
-        } else
-        {
-            $('#sgst_amount_' + no).val(0);
-        }
-    }
     function callIGST(no)
     {
         var igstrate = $('#igst_rate_' + no).val();
@@ -567,10 +554,10 @@
         var finalAmount = 0;
         var taxable = $('#taxable_' + no).val();
         var cgst = $('#cgst_amount_' + no).val();
-        var sgst = $('#sgst_amount_' + no).val();
+       
         var igst = $('#igst_amount_' + no).val();
 
-        finalAmount = parseFloat(taxable) + parseFloat(cgst) + parseFloat(sgst) + parseFloat(igst);
+        finalAmount = parseFloat(taxable) + parseFloat(cgst) + parseFloat(igst);
 
         $('#final_' + no).val(finalAmount);
         

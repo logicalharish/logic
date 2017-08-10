@@ -347,8 +347,9 @@ class Invoices extends CI_Controller {
         
         
         $arrData = array();
-        
-        
+		
+        $where = array('type' => 'member', 'status' => 'Active');
+        $data['memberData'] = $this->Commonmodel->getRecord('tbl_user','id,firstname,lastname', $where); 
         $customerId ='99999999';
         $startDate = $this->firstOfMonth();
         $endDate = $this->lastOfMonth(); 
