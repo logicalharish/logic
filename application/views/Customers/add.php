@@ -49,13 +49,8 @@
                             </div>
                             
                             <div class="form-group col-md-4 col-sm-6">
-                                <label for="user_name"> First Name <span class="text-danger">*</span>  </label>
+                                <label for="user_name"> Company Name <span class="text-danger">*</span>  </label>
                                 <input type="text" name="firstname" id="firstname" class="form-control"  value="<?php echo (isset($arrData->firstname) ? $arrData->firstname : ''); ?>" required="">
-                            </div>
-
-                            <div class="form-group col-md-4 col-sm-6">
-                                <label for="user_name"> Last Name  <span class="text-danger">*</span></label>
-                                <input type="text" name="lastname" id="lastname" class="form-control"  value="<?php echo (isset($arrData->lastname) ? $arrData->lastname : ''); ?>" required="">
                             </div>
                             <div class="form-group col-md-4 col-sm-6">
                                 <label for="user_email"> Email Address  <span class="text-danger">*</span></label>

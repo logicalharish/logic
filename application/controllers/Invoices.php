@@ -13,7 +13,7 @@ class Invoices extends CI_Controller {
 
         $this->tableName = "invoice_master";
         $this->PK = "id";
-        $this->arrayField = array('invoice_number','id', 'customer_id', 'invoice_total', 'invoice_date', 'status');
+        $this->arrayField = array('id', 'customer_id', 'invoice_total', 'invoice_date', 'status');
         $this->tableName1 = "invoice_details";
         
         $this->pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -33,13 +33,15 @@ class Invoices extends CI_Controller {
 
     function view() {
 
-        $dataTableColumns = array('invoice_number','id', 'customer_id', 'invoice_total', 'invoice_date', 'status');
+        $dataTableColumns = array('id', 'customer_id', 'invoice_total', 'invoice_date', 'status');
 
         $arrResult = $this->Commonmodel->getListing($this->controller, $this->tableName, $this->PK, $this->arrayField, $dataTableColumns);
-	
+//        print_r($arrResult);
+//        die();
+
         foreach ($arrResult['data'] as $key => $value) {
-            $arrParentName = $this->Commonmodel->getByID('tbl_user', 'id', $arrResult['data'][$key]['1']);
-            $arrResult['data'][$key]['1'] = $arrParentName->firstname;
+            $arrParentName = $this->Commonmodel->getByID('tbl_user', 'id', $arrResult['data'][$key]['0']);
+            $arrResult['data'][$key]['0'] = $arrParentName->firstname;
         }
 //        print_r($arrResult);
 //        die();
@@ -85,7 +87,8 @@ class Invoices extends CI_Controller {
     }
 
     public function save() {
-        
+//        echo "<pre>";
+//        print_r($_POST);
         if (isset($_POST)) {
         $id = $_POST['id'];
         if ($id == '') {
@@ -99,8 +102,6 @@ class Invoices extends CI_Controller {
                 "total_words" => $_POST['total_words'],
                 "invoice_total" => $_POST['invoice_total'],
                 "po_number" => $_POST['po_number'],
-                "gst_total" => $_POST['gst_total'],
-                "igst_total" => $_POST['igst_total'],
                 "chalan_no" => $_POST['chalan_no'],
                 "chalan_date" => date_format(date_create($_POST['chalan_date']), 'Y-m-d H:i:s'),
                 "po_date" => date_format(date_create($_POST["po_date"]), 'Y-m-d H:i:s'),
@@ -387,9 +388,6 @@ class Invoices extends CI_Controller {
             $arrData[$key]['customer'] = $customerData[0]['firstname'].' '.$customerData[0]['lastname'];
             $arrData[$key]['pan'] = $customerData[0]['pan'];
             $arrData[$key]['tin_no'] = $customerData[0]['tin_no'];
-            $arrData[$key]['gstn'] = $customerData[0]['gstn'];
-            $arrData[$key]['gst_total'] = $data['gst_total'];
-            $arrData[$key]['igst_total'] = $data['igst_total'];
             $arrData[$key]['total'] = $data['invoice_total'];
             
             

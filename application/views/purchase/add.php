@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group col-xs-12 col-md-4">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Invoice Information</div>
+                            <div class="panel-heading">Purchase Information</div>
 
                             <div class="panel-body">
                                 <div class="col-md-12">
@@ -102,12 +102,12 @@
                                         <input type="text" name="bill_book" id="bill_book" class="form-control " value="<?php echo (isset($arrData->bill_book) ? $arrData->bill_book : ''); ?>" required="">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="user_company"> Invoice No </label>
-                                        <input type="text" name="invoice_number" id="invoice_number" class="form-control " value="<?php echo (isset($arrData->invoice_number) ? $arrData->invoice_number : ''); ?>" required="">
+                                        <label for="user_company"> Purchase No </label>
+                                        <input type="text" name="purchase_number" id="purchase_number" class="form-control " value="<?php echo (isset($arrData->purchase_number) ? $arrData->purchase_number : ''); ?>" required="">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label for="user_company"> Invoice Date </label>
-                                        <input type="text" name="invoice_date" id="invoice_date" class="form-control datepicker" value="<?php echo (isset($arrData->invoice_date) ? $arrData->invoice_date : date('m/d/Y')); ?>" required="">
+                                        <label for="user_company"> Purchase Date </label>
+                                        <input type="text" name="purchase_date" id="purchase_date" class="form-control datepicker" value="<?php echo (isset($arrData->purchase_date) ? $arrData->purchase_date : date('m/d/Y')); ?>" required="">
                                     </div>
                                 </div>
 
@@ -235,6 +235,19 @@
                                                 }
                                                 foreach ($array as $key => $value) {
                                                     $productTotal += $value->final_amount;
+                                                    
+                                                    $pcSelect = ($value->uom == 'PC') ? 'selected': '';
+                                                    $kgSelect = ($value->uom == 'KG') ? 'selected': '';
+                                                    
+                                                    if($value->uom == 'PC'){
+                                                        $qty = $value->qty;
+                                                        $weight = 0;
+                                                    }else{
+                                                        $qty = 0;
+                                                        $weight = $value->qty;
+                                                    }
+                                                    
+                                                    
                                                     echo "<tr id='product" . $tblCnt++ . "'>
                                                         <td>
                                                         <input type='text' value='" . $value->product_code . "' name='description[" . $key . "]' srno='" . $key . "' class='form-control prod_desc'/>
@@ -244,13 +257,13 @@
                                                         <input type='text' name='hsn_code[" . $key . "]' id='hsn_code_" . $key . "' class='form-control' value='" . $value->hsn_code . "'/>
                                                         </td>
 							<td>
-                                                      		<select  name='uom[" . $key . "]' id='uom_" . $key . "'   class='form-control'><option></option><option value='KG'>KG </option><option value='PC'>PC </option></select>
+                                                            <select  name='uom[" . $key . "]' id='uom_" . $key . "' onChange='calRate(" . $key . ")' ><option></option><option value='KG'  selected='".$kgSelect."'>KG</option><option value='PC' selected='".$pcSelect."'>PC</option></select>
                                                         </td>
                                                         <td>
-                                                        <input type='text' value='" . $value->qty . "' id='qty_" . $key . "' onBlur='focusRate(" . $key . ")'    name='qty[" . $key . "]' class='form-control'/>
+                                                        <input type='text' value='" . $qty . "' id='qty_" . $key . "' onBlur='focusRate(" . $key . ")'    name='qty[" . $key . "]' class='form-control'/>
                                                         </td>
                                                         <td>
-                                                        <input type='text' value='" . $value->weight . "' id='weight_" . $key . "' onBlur='focusRate(" . $key . ")'    name='weight[" . $key . "]' class='form-control'/>
+                                                        <input type='text' value='" . $weight . "' id='weight_" . $key . "' onBlur='focusRate(" . $key . ")'    name='weight[" . $key . "]' class='form-control'/>
                                                         </td>
                                                         
                                                         <td>
@@ -376,9 +389,9 @@
                                         </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-12">
-                                        <label for="user_company" class="col-md-3 col-sm-6 control-label"> Invoice total </label>
+                                        <label for="user_company" class="col-md-3 col-sm-6 control-label"> Purchase total </label>
                                         <div class="col-md-9">
-                                            <input type="text" name="invoice_total" id="invoice_total" class="form-control" value="<?php echo (isset($arrData->invoice_total) ? $arrData->invoice_total : '0'); ?>" required="">
+                                            <input type="text" name="purchase_total" id="purchase_total" class="form-control" value="<?php echo (isset($arrData->purchase_total) ? $arrData->purchase_total : '0'); ?>" required="">
                                         </div>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-12 hidden">
@@ -454,7 +467,7 @@
                     <td><input  name='taxable_value[" + i + "]' id='taxable_" + i + "'  onBlur='callCGST(" + i + ")' type='text' class='form-control input-md'></td>\n\
                     <td><input  name='CGST_rate[" + i + "]' id='cgst_rate_" + i + "' type='text' onBlur='callCGST(" + i + ")' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='CGST_amount[" + i + "]'id='cgst_amount_" + i + "' type='text' value='0' class='form-control input-md'>\n\
-				<input  name='SGST_rate[" + i + "]'id='sgst_rate_" + i + "' type='hidden' value='0' class='form-control input-md'><input  name='SGST_amount[" + i + "]' id='sgst_amount_" + i + "' type='hidden' value='0' class='form-control input-md'></td>\n\
+                            <input  name='SGST_rate[" + i + "]'id='sgst_rate_" + i + "' type='hidden' value='0' class='form-control input-md'><input  name='SGST_amount[" + i + "]' id='sgst_amount_" + i + "' type='hidden' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='IGST_rate[" + i + "]' id='igst_rate_" + i + "' type='text'  onBlur='callIGST(" + i + ")' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='IGST_amount[" + i + "]' id='igst_amount_" + i + "' type='text' value='0' class='form-control input-md'></td>\n\
                     <td><input  name='final_amount[" + i + "]' id='final_" + i + "' type='text'  onBlur='callTAX(" + i + ")' value='0' class='form-control input-md'></td>\n\
@@ -469,7 +482,7 @@
             var id = $(this).attr('invoicelineid');
             var srno = $(this).attr('srno');
             $.ajax({
-                url: site_url + controller + '/deleteInvoiceDetails/' + id,
+                url: site_url + controller + '/deletePurchaseDetails/' + id,
                 success: function (data) {
                     $("#product" + srno).remove();
                     finalTotal();
@@ -599,7 +612,7 @@
         var invoiceTotal = 0;
 
         invoiceTotal = parseFloat(product_val) + parseFloat(Freight_val) + parseFloat(loading_val) + parseFloat(insurance_val) + parseFloat(other_val);
-        $("#invoice_total").val(invoiceTotal);
+        $("#purchase_total").val(invoiceTotal);
         $("#total_words").val(convertNumberToWords(invoiceTotal));
             }
            
@@ -647,11 +660,11 @@
            
         $(document).on("blur", "#other_charges", function () {
 //            var val = $(this).val();
-//            var totalAmount =  $("#invoice_total").val();
+//            var totalAmount =  $("#purchase_total").val();
 //            var total = parseFloat(val) +parseFloat(totalAmount);
 //            if (total > 0)
 //            {
-//                $("#invoice_total").val(total);            
+//                $("#purchase_total").val(total);            
 //                $("#total_words").val(toWords(total));
 //            }
             calcTotal();
@@ -665,6 +678,7 @@
             source: site_url + 'product/searchProduct',
             select: function (event, ui) {
                 $("#hsn_code_"+sr).val(ui.item.code);
+                $("#uom_"+sr).val(ui.item.uom);
             }
         });
     }
