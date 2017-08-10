@@ -71,8 +71,8 @@
                     $key++;
                     echo '<tr>    
                         <td>'.$key.'</td>
-                        <td>'.$value['invoice_number'].'</td>    
-                        <td>'.$value['invoice_date'].'</td>
+                        <td>'.$value['purchase_number'].'</td>    
+                        <td>'.$value['purchase_date'].'</td>
                         <td>'.$value['customer'].'</td>
                         <td>'.$value['pan'].'</td>
                         <td>'.$value['tin_no'].'</td>
