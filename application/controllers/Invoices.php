@@ -139,7 +139,7 @@ class Invoices extends CI_Controller {
                         $insertDetailsid = $this->Commonmodel->insert($this->tableName1, $arrProductData);
 
                         //product stock manage
-                        $this->productManage($insertDetailsid,$_POST['hsn_code'][$i],'insert');
+                        //$this->productManage($insertDetailsid,$_POST['hsn_code'][$i],'insert');
 
                     }
                 }
@@ -153,7 +153,9 @@ class Invoices extends CI_Controller {
                 "insurance_charges" => $_POST["insurance_charges"],
                 "other_charges" => $_POST['other_charges'],
                 "total_words" => $_POST['total_words'],
-                "invoice_total" => $_POST['invoice_total'],
+                "gst_total" => $_POST['gst_total'],
+                "igst_total" => $_POST['igst_total'],
+				"invoice_total" => $_POST['invoice_total'],
                 "po_number" => $_POST['po_number'],
                 "chalan_no" => $_POST['chalan_no'],
                 "chalan_date" => date_format(date_create($_POST['chalan_date']), 'Y-m-d H:i:s'),
@@ -175,7 +177,7 @@ class Invoices extends CI_Controller {
             if ($getInvoiceDetailsData) {
                 //product stock manage
                 foreach ($getInvoiceDetailsData as $value) {
-                    $this->productManage($value->id,$value->hsn_code,'delete');
+                    //$this->productManage($value->id,$value->hsn_code,'delete');
                 }
                 // delete details
                 $this->Commonmodel->deleteRecord($this->tableName1, 'invoice_id', $id);
@@ -204,7 +206,7 @@ class Invoices extends CI_Controller {
                     );
                         $insertDetailsid = $this->Commonmodel->insert($this->tableName1, $arrProductData);
                         //product stock manage
-                        $this->productManage($insertDetailsid, $_POST['hsn_code'][$i],'insert');
+                        //$this->productManage($insertDetailsid, $_POST['hsn_code'][$i],'insert');
 
                 }
             }
@@ -267,8 +269,11 @@ class Invoices extends CI_Controller {
         $data['memberData'] = $this->Commonmodel->getRecord('tbl_user', "*", array('id' => $arrInvoice[0]['customer_id']));
 		
         $data['invoiceDetailsData'] = $this->Commonmodel->getRecord('invoice_details', "*", array('invoice_id' => $invoiceID));
+
+        $arrDiscount =  $this->Commonmodel->getRecord('invoice_details', "sum(discount)as discount", array('invoice_id' => $invoiceID));
         
-        $data['pdf'] = $this->pdf;
+		$data['discount'] = $arrDiscount[0]['discount'];
+		$data['pdf'] = $this->pdf;
         $this->load->view($this->controller . '/invoice', $data);
     }
     
