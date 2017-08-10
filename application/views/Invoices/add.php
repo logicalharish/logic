@@ -9,14 +9,12 @@
 
     table .form-control{
         border-radius: 0;
-		 text-transform: uppercase;
     }
     
     .form-inline .form-control {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
-	  text-transform: uppercase;
 }
 .pricing_detail .form-inline .form-control {
     padding: 10px;
@@ -28,16 +26,8 @@
     <div id="headerbar">
         <h1 class="headerbar-title"><?php echo $title; ?></h1>
         <div class="headerbar-item pull-right">
-			<div class="btn-group btn-group-sm">
-			<?php if($arrData->id)
-			{?>
-            
-                <button  class="btn btn-primary ajax-loader" type="button">
-					
-					<a href="<?php echo site_url() ."invoices/printInvoice/$arrData->id"  ?>" target="_blank" style="text-decoration: none; color: #FFF"><i class="fa fa-print"></i> Print </a></button>
-			<?php }?>
+            <div class="btn-group btn-group-sm">
                 <button  class="btn btn-success ajax-loader" type="submit">
-					
                     <i class="fa fa-check"></i> Save </button>
                 <a class="btn btn-danger backPage">
                     <i class="fa fa-times"></i> Cancel </a>
@@ -260,7 +250,7 @@
                                                         <input type='text' value='" . $value->qty . "' id='qty_" . $key . "' onBlur='focusRate(" . $key . ")'    name='qty[" . $key . "]' class='form-control'/>
                                                         </td>
                                                         <td>
-                                                        <input type='text' value='" . isset($value->weight) . "' id='weight_" . $key . "' onBlur='focusRate(" . $key . ")'    name='weight[" . $key . "]' class='form-control'/>
+                                                        <input type='text' value='" . $value->weight . "' id='weight_" . $key . "' onBlur='focusRate(" . $key . ")'    name='weight[" . $key . "]' class='form-control'/>
                                                         </td>
                                                         
                                                         <td>

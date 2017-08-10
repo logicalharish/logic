@@ -182,36 +182,6 @@ class Commonmodel extends CI_Model
 		return $strHtml;
 	}
 
-	public function getUnitTypeCombo($strControlName, $strExtraParams = "", $strValue = "")
-	{
-		$strQty	 = ($strValue == '0' || $strValue == 'Qty') ? 'selected' : '';
-		$strGrm	 = ($strValue == '1' || $strValue == 'Grm') ? 'selected' : '';
-
-		$strHtml = '';
-		$strHtml .= '<select class="form-control simple-select" name="' . $strControlName . '" id="' . $strControlName . '"  ' . $strExtraParams . ' >';
-		$strHtml .= '<option value="0" ' . $strQty . '>Quantity</option>';
-		$strHtml .= '<option value="1" ' . $strGrm . '>Gram</option>';
-		$strHtml .= '</select>';
-
-		return $strHtml;
-	}
-
-	public function getProductionStatusCombo($strControlName, $strExtraParams = "", $strValue = "")
-	{
-		$strPending		 = ($strValue == '0' || $strValue == 'Pending') ? 'selected' : '';
-		$strInProgress	 = ($strValue == '1' || $strValue == 'In Progress') ? 'selected' : '';
-		$strDone		 = ($strValue == '2' || $strValue == 'Done') ? 'selected' : '';
-
-		$strHtml = '';
-		$strHtml .= '<select class="form-control simple-select" name="' . $strControlName . '" id="' . $strControlName . '"  ' . $strExtraParams . ' >';
-		$strHtml .= '<option value="0" ' . $strPending . '>Pending</option>';
-		$strHtml .= '<option value="1" ' . $strInProgress . '>In Progress</option>';
-		$strHtml .= '<option value="2" ' . $strDone . '>Done</option>';
-		$strHtml .= '</select>';
-
-		return $strHtml;
-	}
-
 	public function getSetting($strCaseName)
 	{
 		$strQuery	 = "SELECT var_value FROM settings WHERE var_key = '" . $strCaseName . "'";
@@ -309,7 +279,7 @@ class Commonmodel extends CI_Model
 		return $strHtml;
 	}
 
-	function getByID($strTable, $colname, $value)
+        function getByID($strTable, $colname, $value)
 	{
 		$this->db->where($colname, $value);
 		$rsReturn = $this->db->get($strTable)->result();
@@ -419,7 +389,8 @@ class Commonmodel extends CI_Model
 				if (!empty($search))
 				{
 					$where .= " AND  month='" . $findBy['month'] . "'";
-				} else
+				}
+				else
 				{
 					$where .= "   month='" . $findBy['month'] . "'";
 				}
@@ -457,17 +428,17 @@ class Commonmodel extends CI_Model
 		//print_r($records);die;
 		//foreach ($records as $key =>$record)
 		for ($intIndex = 0; $intIndex < count($records); $intIndex++)
-		{
-			$strLink = '<a href="' . site_url() . $strControlername . "/add/{$records[$intIndex][$intPK]}" . '"><i class="material-icons">mode_edit</i></a>
+		{   
+                        $strLink	 = '<a href="' . site_url() . $strControlername . "/add/{$records[$intIndex][$intPK]}" . '"><i class="material-icons">mode_edit</i></a>
                                             <a onClick="return confirm(\'Are You Sure Delete Record!\');" href="' . site_url() . $strControlername . "/delete/{$records[$intIndex][$intPK]}" . '"><i class="material-icons">delete_forever</i></a>';
-			if ($strControlername == 'invoices')
-			{
-				$strLink .= '<a href="' . site_url() . $strControlername . "/printInvoice/{$records[$intIndex][$intPK]}" . '"><i class="large material-icons">assignment</i></a>';
-			}
-
-			array_push($records[$intIndex], $strLink);
+			if($strControlername == 'invoices')
+                        {
+                           $strLink	 .= '<a href="' . site_url() . $strControlername . "/printInvoice/{$records[$intIndex][$intPK]}" . '"><i class="large material-icons">assignment</i></a>';
+                        }
+			
+                        array_push($records[$intIndex], $strLink);
 			unset($records[$intIndex][$intPK]);
-			$arrData[] = array_values($records[$intIndex]);
+			$arrData[]	 = array_values($records[$intIndex]);
 			//$arrData[] = ($records[$intIndex]);
 		}
 
@@ -485,7 +456,7 @@ class Commonmodel extends CI_Model
 	function getListings($strControlername, $strTableName, $intPK, $arrField, $dataTableColumns)
 	{
 		$request_data = $this->comman_lib->get_data();
-
+		
 		$param = $this->comman_lib->sendCustomParametersWithPagination($request_data, $dataTableColumns);
 
 		$records = $this->Commonmodel->get_all_ajax($arrField, $strTableName, $param['SortBy'], $param['SortOrder'], $param['Search'], $request_data['iDisplayLength'], $request_data['iDisplayStart'], $request_data);
@@ -515,83 +486,7 @@ class Commonmodel extends CI_Model
 		return $data;
 	}
 
-	function getListingForJobWork($strControlername, $strTableName, $intPK, $arrField, $dataTableColumns)
-	{
-		$request_data = $this->comman_lib->get_data();
-
-		$param = $this->comman_lib->sendCustomParametersWithPagination($request_data, $dataTableColumns);
-
-
-		$strQuery = "SELECT jwm.id as id, prd.name as product_id, CONCAT_WS(' ',cust.firstname, cust.lastname) as customer_id, job_desc, IF(jwm.unit_type = 1, 'Gram', 'Quantity') as unit_type, jwm.unit as unit, fprd.name as finished_product_id, IF(jwm.finished_unit_type = 1, 'Gram', 'Quantity') as finished_unit_type, jwm.finished_unit as finished_unit, jwm.updated as updated, CASE jwm.status WHEN 0 THEN 'Pending' WHEN 1 THEN 'In Progress' ELSE 'Done' END as status FROM jobwork_master as jwm INNER JOIN product_master as prd ON prd.id = jwm.product_id INNER JOIN product_master as fprd ON fprd.id = jwm.finished_product_id INNER JOIN tbl_user as cust ON cust.id = jwm.customer_id ";
-
-		$sortBy			 = (empty($param['SortBy']) || $param['SortBy'] == "") ? "id" : $param['SortBy'];
-		$sortOrder		 = (empty($param['SortOrder'])) ? "desc" : $param['SortOrder'];
-		$search			 = (empty($param['Search'])) ? "" : $param['Search'];
-		$arrFieldName	 = array('prd.name', 'cust.firstname', 'cust.lastname', 'fprd.name', 'job_desc');
-		if (!empty($search))
-		{
-			for ($intIndex = 0; $intIndex < count($arrFieldName); $intIndex++)
-			{
-				$arrSearch[$arrFieldName[$intIndex]] = $search;
-			}
-
-			$searchParam = '';
-			foreach ($arrSearch as $key => $value)
-			{
-
-				if (empty($searchParam))
-				{
-					$searchParam .= $key . " LIKE '%" . $value . "%'";
-				} else
-				{
-					$searchParam .= " OR " . $key . " LIKE '%" . $value . "%' ";
-				}
-			}
-
-			$strQuery .= ' WHERE 1=1 AND (' . $searchParam . ') ';
-		}
-
-		$strQuery .= " ORDER BY  " . $sortBy . " " . $sortOrder;
-
-		if ($request_data['iDisplayLength'] > 0)
-		{
-			$strQuery .= " LIMIT " . $request_data['iDisplayStart'] . ", " . $request_data['iDisplayLength'];
-		}
-
-		$rsResult		 = $this->db->query($strQuery);
-		$records		 = $rsResult->result_array();
-		$totalRecords	 = count($records);
-		$arrData		 = array();
-		//print_r($records);die;
-		//foreach ($records as $key =>$record)
-		for ($intIndex = 0; $intIndex < count($records); $intIndex++)
-		{
-			$strLink = '<a href="javascript:void(0);" class="edit_row" data-rowid="' . "{$records[$intIndex][$intPK]}" . '"><i class="material-icons">mode_edit</i></a>
-                                        <a  href="javascript:void(0);" class="delete_row" data-rowid="' . "{$records[$intIndex][$intPK]}" . '"><i class="material-icons">delete_forever</i></a>
-                                        <select class="sel_row_status simple-select" data-rowid="' . "{$records[$intIndex][$intPK]}" . '">
-                                        	<option value="">Change Status</option>
-                                        	<option value="0">Pending</option>
-                                        	<option value="1">In Progress</option>
-                                        	<option value="2">Done</option>
-                                        </select>';
-
-			array_push($records[$intIndex], $strLink);
-			unset($records[$intIndex][$intPK]);
-			$arrData[] = array_values($records[$intIndex]);
-			//$arrData[] = ($records[$intIndex]);
-		}
-
-
-		$records				 = $arrData;
-		$data['records']		 = $records;
-		$data['totalRecords']	 = $totalRecords;
-		$data['totalRecords']	 = $totalRecords;
-		$data['draw']			 = $request_data;
-		$data['data']			 = $records;
-
-		return $data;
-	}
-
+        
 	function get_user_access($id)
 	{
 		$where	 = array('aid' => $id);
@@ -612,9 +507,9 @@ class Commonmodel extends CI_Model
 	function checkLogin($strUsername, $strPassword)
 	{
 
-		$where	 = array('type' => 'Admin', 'email' => $strUsername, 'password' => $strPassword);
-		$this->db->select('*');
-		$this->db->from('tbl_user');
+		$where = array('type' => 'Admin', 'email' => $strUsername, 'password' => $strPassword);
+                $this->db->select('*');
+                $this->db->from('tbl_user');
 		$this->db->where($where);
 		$query	 = $this->db->get();
 		$result	 = $query->result_array();
@@ -641,7 +536,7 @@ class Commonmodel extends CI_Model
 	}
 
 	// locationlist
-	public function customerlist($id = '')
+        public function customerlist($id = '')
 	{
 		if ($id != '')
 		{
@@ -651,8 +546,8 @@ class Commonmodel extends CI_Model
 			return $this->db->get("customers")->result();
 		}
 	}
-
-	public function userlist($id = '')
+        
+        public function userlist($id = '')
 	{
 		if ($id != '')
 		{
@@ -662,20 +557,17 @@ class Commonmodel extends CI_Model
 			return $this->db->get("tbl_user")->result();
 		}
 	}
+        
+        public function memberlist($id = '') {
 
-	public function memberlist($id = '')
-	{
+            if ($id != '') {
 
-		if ($id != '')
-		{
+                return $this->db->get_where('tbl_user', array('id' => $id, 'type' => 'member'))->result();
+            } else {
 
-			return $this->db->get_where('tbl_user', array('id' => $id, 'type' => 'member'))->result();
-		} else
-		{
-
-			return $this->db->get("tbl_user")->result();
-		}
-	}
+                return $this->db->get("tbl_user")->result();
+            }
+        }
 
 	public function doesRecordExist($table, $condKey, $condValue)
 	{
@@ -689,20 +581,21 @@ class Commonmodel extends CI_Model
 		}
 	}
 
+
 	public function customQuery($strQuery)
 	{
 		$rsResult	 = $this->db->query($strQuery);
 		$rsRecord	 = $rsResult->result_array();
 		return $rsRecord;
 	}
-
-	public function getSerachData($tableName, $columns, $keyword)
-	{
-		$strQuery	 = "select * from $tableName where $columns like'%$keyword%'";
-		$rsResult	 = $this->db->query($strQuery);
-		$rsRecord	 = $rsResult->result_array();
-		return $rsRecord;
-	}
+        
+        public function getSerachData($tableName, $columns, $keyword)
+        {
+            $strQuery    = "select * from $tableName where $columns like'%$keyword%'";
+            $rsResult	 = $this->db->query($strQuery);
+            $rsRecord	 = $rsResult->result_array();
+            return $rsRecord;
+        }
 
 }
 

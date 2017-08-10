@@ -56,47 +56,34 @@
     <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="manageTbls">
         <thead>
                 <tr>    
-                        
+                        <th>Srno</th>
                         <th>Invoice Number</th>
                         <th>Invoice date</th>
                         <th>Customer Name</th>
                         <th>Pan Number</th>
                         <th>TIN Number</th>
-                        <th>GST Number</th>
-                        <th>GST Total</th>
-                        <th>IGST Total</th>
                         <th>Total</th>
                 </tr>
         </thead>
         <tbody>
             <?php 
-			$intGst = 0;
-			$intIGst = 0;
                 foreach ($arrData as $key => $value) { 
                     $key++;
-					$intGst += $value['gst_total'];
-					$intIGst += $value['igst_total'];
                     echo '<tr>    
-                       
-                        <td width="5%">'.$value['invoice_number'].'</td>    
-                        <td width="5%">'.$value['invoice_date'].'</td>
-                        <td width="15%">'.$value['customer'].'</td>
-                        <td width="5%">'.$value['pan'].'</td>
-                        <td width="5%">'.$value['tin_no'].'</td>
-                        <td width="5%">'.$value['gstn'].'</td>
-                        <td width="5%">'.$value['gst_total'].'</td>
-                        <td width="5%">'.$value['igst_total'].'</td>
-                  
-                        <td width="5%">'.number_format($value['total'],2).'</td>
+                        <td>'.$key.'</td>
+                        <td>'.$value['invoice_number'].'</td>    
+                        <td>'.$value['invoice_date'].'</td>
+                        <td>'.$value['customer'].'</td>
+                        <td>'.$value['pan'].'</td>
+                        <td>'.$value['tin_no'].'</td>
+                        <td>'.$value['total'].'</td>
                     </tr>';
 
                } ?>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="6" align="right" >Grand Total</td>
-                <td><?php echo number_format($intGst,2); ?></td>
-                <td><?php echo number_format($intIGst,2); ?></td>
+                <td colspan="5" align="right" >Grand Total</td>
                 <td><?php echo number_format($grandTotal,2); ?></td>
             </tr>
                 

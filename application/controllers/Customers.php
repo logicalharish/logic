@@ -79,7 +79,6 @@ class Customers extends CI_Controller {
                 $arrData = array(
                 "type" => $_POST['type'],
                 "firstname" => $_POST['firstname'],
-                "lastname" => $_POST['lastname'],
                 "email" => $_POST['email'],
                 "phone" => $_POST['phone'],
                 "phone2" => $_POST['phone2'],
@@ -105,7 +104,6 @@ class Customers extends CI_Controller {
                $arrData = array(
                 "type" => $_POST['type'],
                 "firstname" => $_POST['firstname'],
-                "lastname" => $_POST['lastname'],
                 "email" => $_POST['email'],
                 "phone" => $_POST['phone'],
                 "phone2" => $_POST['phone2'],

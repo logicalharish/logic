@@ -93,6 +93,7 @@ if (!empty($invoiceDetailsData))
                         <td>
                             <table width="100%" border="1" cellpadding="0" cellspacing="0" class="">
                               <tr>
+<<<<<<< HEAD
                                 
                                 <td colspan="9" align="center" valign="top">
                                     <h2 class="mtop-10">TAX INVOICE</h2>
@@ -119,6 +120,15 @@ if (!empty($invoiceDetailsData))
 									
 									</table>
 								</td>
+=======
+                                <td>
+                                <img src="' . base_url() . 'assets/core/img/favicon.png"/> 
+								</td>
+                                <td colspan="8" align="center">
+                                    <h2 class="mtop-10">' . $adminData[0]['firstname'] . ' ' . $adminData[0]['lastname'] . '</h2>
+                                    <address class="mbottom-10">' . $adminData[0]['address'] . ',' . $adminData[0]['city'] . ' - ' . $adminData[0]['pincode'] . ' <br>' . $adminData[0]['email'] . '<br>' . $adminData[0]['website'] . '</address>
+                                </td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                               </tr>
                             </table>
                         </td>
@@ -127,6 +137,7 @@ if (!empty($invoiceDetailsData))
                         <td>
                             <table width="100%" border="1" class="" cellpadding="0" cellspacing="0">
                               <tr>
+<<<<<<< HEAD
                                 <td width="50%" >
 									<table width="100%"  cellpadding="2">
 									<tr height="30">
@@ -152,6 +163,23 @@ if (!empty($invoiceDetailsData))
 									
 									</table>
 								
+=======
+                                <td width="50%">Your Gstin Number: ' . $adminData[0]['gstn'] . '
+                                    <br>Your PAN Number: ' . $adminData[0]['pan'] . '
+                                    <br>Tax Is Payable On Reverse Charge: (Yes/No)
+                                    <br>Your Bill Book: ' . $invoiceMasterData[0]['bill_book'] . '
+                                    <br>Your Invoice Number: ' . $invoiceMasterData[0]['invoice_number'] . '
+                                    <br>Your Invoice Date: ' . date_format(date_create($invoiceMasterData[0]['invoice_date']), 'Y-m-d') . '
+                                    <br>Your Chalan Number: ' . $invoiceMasterData[0]['chalan_no'] . '
+                                    <br>Your Chalan Date: ' . date_format(date_create($invoiceMasterData[0]['chalan_date']), 'Y-m-d') . '
+                                    <br>Your PO Number: ' . $invoiceMasterData[0]['po_number'] . '
+                                    <br>Your PO Date: ' . date_format(date_create($invoiceMasterData[0]['po_date']), 'Y-m-d') . '
+                                </td>
+                                <td width="50%">Transportation Mode: <small>(Apply for Supply of Goods only) </small> ' . $invoiceMasterData[0]['transport'] . '
+                                    <br>Veh.No : ' . $invoiceMasterData[0]['vehical_number'] . '
+                                    <br>Date & Time of Supply: ' . date_format(date_create($invoiceMasterData[0]['date_suply']), 'Y-m-d') . '
+                                    <br>Place OF Supply: ' . $invoiceMasterData[0]['place_suply'] . '
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                 </td>
                               </tr>
                             </table>
@@ -163,9 +191,10 @@ if (!empty($invoiceDetailsData))
                             <table width="100%" border="1" class="" cellpadding="1" cellspacing="0">
                               <tr class="bg-gray" height="30">
                                 <td width="50%" align="center" class="bdr-bottom"><strong>Details of Receiver (Billed to)</strong></td>
-                                <td width="50%" align="center" class="bdr-bottom"><strong>Transport Deatails</strong></td>
+                                <td width="50%" align="center" class="bdr-bottom"><strong>Details of Consignee (Shipped to)</strong></td>
                               </tr>
                               <tr>
+<<<<<<< HEAD
                                 <td>
 								<table width="100%" cellpadding="2">
 									<tr><td  width="30%" >Name</td><td align="left"  width="70%"><strong>' . $memberData[0]['firstname'] . ' ' . $memberData[0]['lastname'] . '</strong></td></tr>
@@ -184,6 +213,19 @@ if (!empty($invoiceDetailsData))
 									<tr><td>Place OF Supply</td><td align="left"><strong>' . $invoiceMasterData[0]['place_suply'] . '</strong></td></tr>
 									
 									</table>
+=======
+                                <td>Name: ' . $memberData[0]['firstname'] . ' ' . $memberData[0]['lastname'] . '
+                                <br>Address: ' . $memberData[0]['address'] . ' ' . $memberData[0]['city'] . '
+                                <br>State: ' . $memberData[0]['state'] . ' 
+                                <br>State Code: ' . $memberData[0]['pincode'] . '
+                                <br>GSTIN Number: ' . $memberData[0]['gstn'] . '
+                                </td>
+                                <td>Name: ' . $memberData[0]['firstname'] . ' ' . $memberData[0]['lastname'] . '
+                                <br>Address: ' . $memberData[0]['address'] . ' ' . $memberData[0]['city'] . '
+                                <br>State: ' . $memberData[0]['state'] . ' 
+                                <br>State Code: ' . $memberData[0]['pincode'] . '
+                                <br>GSTIN Number: ' . $memberData[0]['gstn'] . '
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                 </td>
                               </tr>
                             </table>
@@ -193,6 +235,7 @@ if (!empty($invoiceDetailsData))
                         <td>
                             <table width="100%" border="1" cellspacing="0" cellpadding="1">
                               <tr>
+<<<<<<< HEAD
                                 <td rowspan="2" width="3%"><strong>No</strong></td>
                                 <td rowspan="2" width="20%"><strong>Description of Goods</strong></td>
                                 <td rowspan="2" width="9.8%"><strong>HSN Code</strong></td>
@@ -212,6 +255,28 @@ if (!empty($invoiceDetailsData))
 	}
 	$html	 .= '<td colspan="2" align="center"><strong>' . $tax . '</strong></td>';
 	$html	 .= '<td rowspan="2"  width="12%"><strong>Amount</strong></td>
+=======
+                                <td rowspan="2" width="5%"><strong>S.No</strong></td>
+                                <td rowspan="2" width="15%"><strong>Description of Goods</strong></td>
+                                <td rowspan="2" width="8%"><strong>HSN<br>Code<br>(GST)</strong></td>
+                                <td rowspan="2" width="5%"><strong>Qty</strong></td>
+                                <td rowspan="2" width="5%"><strong>UOM</strong></td>
+                                <td rowspan="2" width="8%"><strong>Rate</strong></td>
+                                <td rowspan="2" width="10%"><strong>Total</strong></td>
+                                <td rowspan="2" width="8%"><strong>Discount</strong></td>
+                                <td rowspan="2" width="8%"><strong>Taxable<br>value</strong></td>';
+	
+				if($invoiceDetailsData[0]['IGST_amount']==0.00)
+				{
+					$tax = 'GST';
+				}
+				else
+				{
+					$tax = 'IGST'; 
+				}
+				$html			 .= '<td colspan="2"><strong>'.$tax.'</strong></td>';
+                                $html			 .= '<td rowspan="2"  width="11.3%"><strong>Amount</strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                               </tr>';
 
 
@@ -225,6 +290,7 @@ if (!empty($invoiceDetailsData))
 	$Igst			 = 0;
 	$srno			 = 0;
 	$invoiceTotal	 = 0;
+<<<<<<< HEAD
 	$nettotal		 = 0;
 	//foreach ($invoiceDetailsData as $invoiceDetailsData[$intIndex])
 	$intRow			 = 10 - count($invoiceDetailsData);
@@ -260,11 +326,41 @@ if (!empty($invoiceDetailsData))
 
 			$html .= '<td align="right"> ' . number_format($invoiceDetailsData[$intIndex]['CGST_rate'], 2) . ' &nbsp; </td>
                                     <td align="right"> ' . number_format($invoiceDetailsData[$intIndex]['CGST_amount'], 2) . ' &nbsp;</td>';
+=======
+	$nettotal = 0;
+	foreach ($invoiceDetailsData as $job)
+	{
+//                                    $productData = $this->Commonmodel->getRecord('product_master', "*", array('id' => $job['product_id']));
+		$total	 += $job['final_amount'];
+		$nettotal	 += $job['taxable_value'];
+		$srno	 += 1;
+
+		$Cgst	 += $job['CGST_amount'];
+		$Sgst	 += $job['SGST_amount'];
+		$Igst	 += $job['IGST_amount'];
+
+		$html .= '<tr>
+                                    <td>' . $srno . '</td>
+                                    <td>' . $job['product_code'] . '</td>
+                                    <td>' . $job['hsn_code'] . '</td>
+                                    <td>' . $job['qty'] . '</td>
+                                    <td>' . $job['uom'] . '</td>
+                                    <td>' . number_format($job['rate'], 2) . '</td>
+                                    <td>' . number_format($job['total'], 2) . '</td>
+                                    <td>' . $job['discount'] . '</td>
+                                    <td>' . $job['taxable_value'] . '</td>';
+		if ($job['IGST_rate'] == 0)
+		{
+			
+			$html .= '<td>' . number_format($job['CGST_rate'], 2) . '</td>
+                                    <td>' . number_format($job['CGST_amount'], 2) . '</td>';
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
 		} else
 		{
-			$html .= '<td align="right"> ' . number_format($invoiceDetailsData[$intIndex]['IGST_rate'], 2) . '&nbsp; </td>
-                                    <td align="right">' . number_format($invoiceDetailsData[$intIndex]['IGST_amount'], 2) . '&nbsp;</td>';
+			$html .= '<td>' . number_format($job['IGST_rate'], 2) . '</td>
+                                    <td>' . number_format($job['IGST_amount'], 2) . '</td>';
 		}
+<<<<<<< HEAD
 		$html .= ' <td align="right"><strong>' . number_format($invoiceDetailsData[$intIndex]['final_amount'], 2) . '</strong></td>
                                     </tr>';
 	}
@@ -285,6 +381,9 @@ if (!empty($invoiceDetailsData))
                                     <td></td>';
 
 		$html .= ' <td><strong></strong></td>
+=======
+		$html .= ' <td><strong>' . number_format($job['final_amount'], 2) . '</strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                     </tr>';
 	}
 	$taxTotal		 = $Cgst + $Igst;
@@ -293,6 +392,7 @@ if (!empty($invoiceDetailsData))
 	$html	 .= ' <tr>
                                 <td colspan="10" height="35">&nbsp;</td>
                               </tr>';
+<<<<<<< HEAD
 	$taxtype = '';
 	if ($invoiceDetailsData[0]['IGST_amount'] == 0.00)
 	{
@@ -302,6 +402,17 @@ if (!empty($invoiceDetailsData))
                               
                                 <td colspan="2" align="right"><strong>SGST Total &nbsp;</strong></td>
                                 <td><strong> ' . number_format($taxTotal / 2, 2) . '</strong></td>
+=======
+	 $taxtype = '';
+					if($invoiceDetailsData[0]['IGST_amount']==0.00)
+				{
+					$taxtype			 ='
+                                <td colspan="5" align="right"><strong>CGST Total </strong></td>
+                                <td><strong> ' . number_format($taxTotal/2, 2) . '</strong></td>
+                              
+                                <td colspan="2" align="right"><strong>SGST Total</strong></td>
+                                <td><strong> ' . number_format($taxTotal/2, 2) . '</strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                               ';
 		$colspan = 0;
 	} else
@@ -310,6 +421,7 @@ if (!empty($invoiceDetailsData))
 	}
 
 
+<<<<<<< HEAD
 	$html .= '<tr>	<td colspan="4">Total</td>
                                 <td  align="right"><strong>' . number_format($qtyTotal, 2) . '</strong></td>
                                 <td align="right"><strong> ' . number_format($weightTotal, 2) . ' </strong></td>
@@ -319,10 +431,19 @@ if (!empty($invoiceDetailsData))
                                 <td align="right"><strong> ' . number_format($nettotal, 2) . ' </strong></td>
                               </tr><tr>' . $taxtype . '
                                 <td colspan="' . $colspan . '" align="right"><strong>Tax Total &nbsp;</strong></td>
+=======
+				
+                              $html			 .='<tr>
+                                <td colspan="11" align="right"><strong>Gross Total </strong></td>
+                                <td align="right"><strong> ' . number_format($nettotal, 2) . ' </strong></td>
+                              </tr><tr>'.$taxtype.'
+                                <td colspan="'.$colspan.'" align="right"><strong>Tax Total </strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                 <td align="right"><strong> ' . number_format($taxTotal, 2) . '</strong></td>
                               </tr>
                               
                               <tr>
+<<<<<<< HEAD
                                 <td colspan="10" align="right"><strong>Freight Charges &nbsp;</strong></td>
                                 <td align="right"><strong> ' . number_format($invoiceMasterData[0]['freight_charges'], 2) . ' </strong></td>
                               </tr>
@@ -336,18 +457,38 @@ if (!empty($invoiceDetailsData))
                               </tr>
                               <tr>
                                 <td colspan="10" align="right"><strong>Other Charges &nbsp;</strong></td>
+=======
+                                <td colspan="11" align="right"><strong>Freight Charges </strong></td>
+                                <td align="right"><strong> ' . number_format($invoiceMasterData[0]['freight_charges'], 2) . ' </strong></td>
+                              </tr>
+                              <tr>
+                                <td colspan="11" align="right"><strong>Loading and Packing Charges </strong></td>
+                                <td align="right"><strong> ' . number_format($invoiceMasterData[0]['loading_packeges_charges'], 2) . ' </strong></td>
+                              </tr>
+                              <tr>
+                                <td colspan="11" align="right"><strong>Insurance Charges </strong></td>
+                                <td align="right"><strong> ' . number_format($invoiceMasterData[0]['insurance_charges'], 2) . ' </strong></td>
+                              </tr>
+                              <tr>
+                                <td colspan="11" align="right"><strong>Other Charges </strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                 <td align="right"><strong> ' . number_format($invoiceMasterData[0]['other_charges'], 2) . ' </strong></td>
                               </tr>
                               <tr>
                                 <td colspan="8" align="left"><strong>Invoice Value (In Words) </strong> ' . $obj->convert_number($invoiceTotal) . ' Only</td>
+<<<<<<< HEAD
                                 <td colspan="2" align="right"><strong>Invoice Total  &nbsp;</strong></td>
                                 <td align="right"><strong>' . number_format(round($invoiceTotal), 2) . '</strong></td>
+=======
+                                <td colspan="3" align="right"><strong>Invoice Total </strong></td>
+                                <td align="right"><strong>' . number_format($invoiceTotal, 2) . '</strong></td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                               </tr>
                               <tr>
                                 <td colspan="12" height="20">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td colspan="12" align="left">Amount of Tax Subject to Reverse Charge</td>
+                                <td colspan="12" align="left"><strong>Amount of Tax Subject to Reverse Charge</strong></td>
                              
                               </tr>
                             </table>
@@ -371,8 +512,8 @@ if (!empty($invoiceDetailsData))
                         <td>
                             <table width="100%" border="1" cellspacing="0" cellpadding="0">
                               <tr class="bg-gray">
-                                <td width="50%" align="center" valign="bottom"><strong> TERM &amp; CONDITION OF SALE</strong></td>
-                                <td width="50%" align="center" valign="bottom"><strong> COMPANY NAME</strong></td>
+                                <td width="50%" align="center" valign="bottom"><strong>YOUR TERM &amp; CONDITION OF SALE</strong></td>
+                                <td width="50%" align="center" valign="bottom"><strong>YOUR COMPANY NAME</strong></td>
                               </tr>
                               <tr>
                                     <td>TERMS: <strong>1.</strong> Payment should be made by A/c Payees Cheque only. <strong>2.</strong> 18 % interest will be charged on acounts remain unpaid 15 days after delivery.<strong> 3.</strong> Our risk &amp; responsibilities ceases when the goods leave our premises. 4.SUBJECT TO AHMEDABAD JURISDICTION</td>
@@ -380,7 +521,7 @@ if (!empty($invoiceDetailsData))
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                       <tr height="50">
                                         <td width="30%" valign="bottom"><strong>Signature:</strong></td>
-                                        <td width="70%" valign="bottom"><br><br><br><br>________________________</td>
+                                        <td width="70%" valign="bottom">________________________</td>
                                       </tr>
                                       <tr>
                                         <td colspan="2" class="bg-gray border-1" align="center"><strong>Authorised Signatory</strong></td>
@@ -390,8 +531,13 @@ if (!empty($invoiceDetailsData))
                                         <td> ' . $adminData[0]['firstname'] . ' ' . $adminData[0]['lastname'] . '</td>
                                       </tr>
                                       <tr>
+<<<<<<< HEAD
                                         <td><br><strong>Designation:</strong></td>
                                         <td>Proprietor</td>
+=======
+                                        <td><strong>Designation:</strong></td>
+                                        <td> ' . $adminData[0]['type'] . '</td>
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
                                       </tr>
                                     </table>
 
@@ -405,7 +551,14 @@ if (!empty($invoiceDetailsData))
                     </body>
                     </html>';
 // echo $html;                      
+<<<<<<< HEAD
 //die;
+=======
+
+                              
+        $pdf->SetHeaderData('', '0', 'Invoice Systems', '510, Venus Amedues, Jodhpur Cross Raod, Satelite,Ahmedabad - 380015', '','');
+        $pdf->setFooterData('');
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
 
 	$pdf->SetHeaderData('', '0', 'Invoice Systems', '510, Venus Amedues, Jodhpur Cross Raod, Satelite,Ahmedabad - 380015', '', '');
 	$pdf->setFooterData('');
@@ -421,16 +574,29 @@ if (!empty($invoiceDetailsData))
 	// set default monospaced font
 	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
+<<<<<<< HEAD
 	// set margins
 	$pdf->SetMargins(PDF_MARGIN_LEFT, 10, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 	$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+=======
+        // remove default header/footer
+        $pdf->setPrintHeader(true);
+        $pdf->setPrintFooter(true);
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
 
 	// set auto page breaks
 	$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
+<<<<<<< HEAD
 	// set image scale factor
 	$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+=======
+        // set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+>>>>>>> ae8cf2c33caa53d86472ed16834b535e5321feaa
 
 	// add a page
 	$pdf->AddPage();

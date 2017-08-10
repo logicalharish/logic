@@ -77,6 +77,7 @@ class Product extends CI_Controller {
             $data[$key]['label'] = $value['name'];
             $data[$key]['id'] = $value['id'];
             $data[$key]['code'] = $value['hsn_code'];
+            $data[$key]['uom'] = $value['uom'];
         }
         echo json_encode($data);
     }

@@ -44,17 +44,19 @@
                         <li><a href="<?php echo base_url();?>invoices">View Invoices</a></li>
                     </ul>
                 </li>
-				<li class="dropdown">
+                
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
-                        <span class="hidden-md">Jobword</span>
-                        <i class="visible-md-inline fa fa-database"></i>
+                        <span class="hidden-md">Purchase</span>
+                        <i class="visible-md-inline fa fa-file-text"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url();?>jobwork">View Jobwork</a></li>
-                      
+                        <li><a href="<?php echo base_url();?>purchase/add" class="create-invoice">Create purchase</a></li>
+                        <li><a href="<?php echo base_url();?>purchase">View purchase</a></li>
                     </ul>
                 </li>
+                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-caret-down"></i> &nbsp;
@@ -63,7 +65,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url();?>product">View products</a></li>
-                        <li><a href="<?php echo base_url();?>units">Product Units</a></li>
                     </ul>
                 </li>
 
@@ -75,6 +76,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url();?>invoices/report">Invoice Report</a></li>
+                        <li><a href="<?php echo base_url();?>purchase/report">Purchase Report</a></li>
                     </ul>
                 </li>
 

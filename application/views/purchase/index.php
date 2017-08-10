@@ -1,5 +1,5 @@
 <div id="headerbar">
-    <h1 class="headerbar-title">Invoices Info</h1>
+    <h1 class="headerbar-title">Purchases Info</h1>
     <div class="headerbar-item pull-right">
         <div class="btn-group btn-group-sm">
             <a href="<?php echo site_url() . $controller . "/add"; ?>" ><button id="btn-submit" name="btn_submit" class="btn btn-success ajax-loader" value="1">
@@ -12,8 +12,8 @@
         <thead>
                 <tr>    
                         <th>Customer id</th>
-                        <th>Invoice total</th>
-                        <th>Invoice date</th>
+                        <th>Purchase total</th>
+                        <th>Purchase date</th>
                         <th>Status</th>
                         <th>Action</th>
                 </tr>
