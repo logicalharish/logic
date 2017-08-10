@@ -67,6 +67,17 @@
                         <li><a href="<?php echo base_url();?>product">View products</a></li>
                     </ul>
                 </li>
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-caret-down"></i> &nbsp;
+                        <span class="hidden-md">Ledger Statement</span>
+                        <i class="visible-md-inline fa fa-file-text"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url();?>ledger">View Statements</a></li>
+                    </ul>
+                </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
