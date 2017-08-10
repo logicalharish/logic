@@ -1060,7 +1060,7 @@
             <div id="panel-quick-actions" class="panel panel-default quick-actions">
 
                 <div class="panel-heading">
-                    <b>Quick Actions</b>
+                    <b>Quick Actionssss</b>
                 </div>
 
                 <div class="btn-group btn-group-justified no-margin">
